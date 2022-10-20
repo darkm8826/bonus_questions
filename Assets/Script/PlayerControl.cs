@@ -17,18 +17,18 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
-        if(ControlTime != 1)
+        if (ControlTime != 1)
         {
         passedTime += Time.deltaTime;
         float h = joystick.Horizontal;
         float v = joystick.Vertical;
-        Vector3 dir = new Vector3(h,0,v);
+        Vector3 dir = new Vector3(h, 0, v);
         if (dir.magnitude>0.1f)
         {
 
         float faceAngle = Mathf.Atan2(h,v) * Mathf.Rad2Deg;
 
-        Quaternion targetRotation = Quaternion.Euler( 0, faceAngle, 0);
+        Quaternion targetRotation = Quaternion.Euler(0, faceAngle, 0);
         transform.rotation=Quaternion.Lerp(transform.rotation, targetRotation, 0.1f);
         }
 

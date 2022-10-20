@@ -17,7 +17,7 @@ public class Teleport : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name  =="player")
+        if (other.gameObject.name == "player")
         {
             other.gameObject.transform.position = TeleportSpot.gameObject.transform.position;
             TeleportSpot.gameObject.SetActive(false);

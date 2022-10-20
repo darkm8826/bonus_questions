@@ -17,7 +17,7 @@ public class TeleportControl : MonoBehaviour
     }
     private void OnTriggerExit(Collider other) 
     {
-         if (other.gameObject.name  =="player")
+         if (other.gameObject.name == "player")
         {
             Teleport.gameObject.SetActive(true);
         }
