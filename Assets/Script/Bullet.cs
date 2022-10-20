@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Rigidbody rb;
+    private Rigidbody rb;
     float lifeTime = 0; // 計時秒數
 
     void Start()
