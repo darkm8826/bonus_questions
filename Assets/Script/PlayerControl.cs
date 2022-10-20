@@ -10,35 +10,36 @@ public class PlayerControl : MonoBehaviour
     private float timerInterval = 0.3f; 
     public GameObject bullet;
     public GameObject firePoint;
+    public float ControlTime = 0; 
     void Start()
     {
         cc = GetComponent<CharacterController>();
     }
     void Update()
     {
+        if(ControlTime != 1)
+        {
+        passedTime += Time.deltaTime;
         float h = joystick.Horizontal;
         float v = joystick.Vertical;
-        passedTime += Time.deltaTime;
-
         Vector3 dir = new Vector3(h,0,v);
-
-        
         if (dir.magnitude>0.1f)
         {
 
         float faceAngle = Mathf.Atan2(h,v) * Mathf.Rad2Deg;
 
-        Quaternion targetRotation = Quaternion.Euler(0,faceAngle,0);
-        transform.rotation=Quaternion.Lerp(transform.rotation, targetRotation,0.1f);
+        Quaternion targetRotation = Quaternion.Euler( 0, faceAngle, 0);
+        transform.rotation=Quaternion.Lerp(transform.rotation, targetRotation, 0.1f);
         }
 
 
-        if(!cc.isGrounded)
+        if (!cc.isGrounded)
         {
             dir.y=-9.8f*30*Time.deltaTime;
         }
-        cc.Move(dir*Time.deltaTime*10);
-        if(Input.GetKey(KeyCode.Space))
+        cc.Move (dir*Time.deltaTime*10);
+
+        if (Input.GetKey(KeyCode.Space))
         {
           if (passedTime >= timerInterval)
          {
@@ -46,5 +47,17 @@ public class PlayerControl : MonoBehaviour
             passedTime = 0;
          }
         }
+        }
+    }  
+   private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag  == "Teleport")
+        StartCoroutine(MyCoroutine());
+    }
+    IEnumerator MyCoroutine()
+    {
+    ControlTime = 1;
+    yield return new WaitForSeconds(0.2f);
+    ControlTime = 0;
     }
 }

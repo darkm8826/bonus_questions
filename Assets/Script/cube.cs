@@ -18,8 +18,9 @@ public class cube : MonoBehaviour
      private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.name == "bullet(Clone)")
-
+        {
         gameObject.SetActive(false);
         Destroy(this.gameObject);
+        }
     }
 }
