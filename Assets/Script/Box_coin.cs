@@ -8,7 +8,6 @@ public class Box_coin : MonoBehaviour
     public GameObject Box;
 
     private Vector3 CoinTransform;
-    bool tr = true;
 
     void Start()
     {
@@ -30,9 +29,15 @@ public class Box_coin : MonoBehaviour
 
     IEnumerator AddCoin()
     {
-        Instantiate(Coin, CoinTransform, Quaternion.identity);
+        int Circle = 4;
+        while (Circle > 0)
+        {
+            Instantiate(Coin, CoinTransform, Quaternion.identity);
+            yield return new WaitForSeconds(0.01f);
+            Circle--;
+        }
         yield return new WaitForSeconds(0.01f);
-        Instantiate(Coin, CoinTransform, Quaternion.identity);
+
         gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
