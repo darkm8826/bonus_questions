@@ -32,8 +32,13 @@ public class Box_coin : MonoBehaviour
         int Circle = 4;
         while (Circle > 0)
         {
-            Instantiate(Coin, CoinTransform, Quaternion.identity);
+            float rx = Random.Range(-0.2f, 0.2f);
+            float rz = Random.Range(-0.2f, 0.2f);
+            float rr = Random.Range(0, 360f);
+            Vector3 randPos = new Vector3(rx, 0, rz);
+            Quaternion randRot = Quaternion.Euler(0, rr, 0);
             yield return new WaitForSeconds(0.01f);
+            Instantiate(Coin, CoinTransform + randPos, randRot);
             Circle--;
         }
         yield return new WaitForSeconds(0.01f);
